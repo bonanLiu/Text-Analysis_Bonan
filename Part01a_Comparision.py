@@ -7,8 +7,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+import os
 
 import psutil
+
+folder_path = 'Part01_Result'
 
 # CPU testing
 def resource_monitor():
@@ -310,13 +313,13 @@ if __name__ == "__main__":
     print("\nSelenium Scraping......")
     selenium_articles, selenium_time, selenium_res_before, selenium_res_after, selenium_success_rate = benchmark_function(scrape_with_selenium)
     selenium_df = pd.DataFrame(selenium_articles)
-    selenium_df.to_csv("Part01_Result/Article(se).csv", index=False, encoding='utf-8')
+    selenium_df.to_csv(f"{folder_path}/Article(se).csv", index=False, encoding='utf-8')
     
     # BeautifulSoup
     print("\nBeautifulSoup Scraping......")
     bs_articles, bs_time, bs_res_before, bs_res_after, bs_success_rate = benchmark_function(scrape_with_beautifulsoup)
     bs_df = pd.DataFrame(bs_articles)
-    bs_df.to_csv("Part01_Result/Article(bs).csv", index=False, encoding='utf-8')
+    bs_df.to_csv(f"{folder_path}/Article(bs).csv", index=False, encoding='utf-8')
     
     # Create a DataFrame for the report instead of writing to a text file
     reportArray = {
